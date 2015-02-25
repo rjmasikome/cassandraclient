@@ -2,14 +2,10 @@ angular.module('MyApp')
   .controller('MainCtrl', ['$scope', '$http','Show', function($scope, $http, Show) {
 
     $scope.keyspaces = Show.keyspaces.query();
-    // $scope.filterByGenre = function(genre) {
-    //   $scope.shows = Show.query({ genre: genre });
-    //   $scope.headingTitle = genre;
-    // };
 
     $scope.GetTables = function(ks) {
         $scope.keySpace = ks;
-        $http.post('/metatable', {keyspace: ks}).
+        $http.post('/api/metatable', {keyspace: ks}).
                 success(function(data) {
                    console.log(data);
                    $scope.tables = data;
@@ -21,7 +17,8 @@ angular.module('MyApp')
     };
 
     $scope.GenerateTables = function(table, ks) {
-        $http.post('/gentable', {table: table, keyspace: ks}).
+        $scope.tableName = table;
+        $http.post('/api/gentable', {table: table, keyspace: ks}).
                 success(function(data) {
                    console.log(data);
                    $scope.genData = data;

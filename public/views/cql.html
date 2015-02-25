@@ -1,0 +1,65 @@
+<div class="jumbotron">
+  <div class="container">
+    <div class="panel-heading">Keyspace:    {{keySpace}}</div>
+    <ul class="genres">
+      <li ng-repeat="ks in keyspaces">
+        <span ng-click="GetTables(ks)">{{ks}}</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">Run CQL</div>
+    <div class="panel-body">
+      <form class="form" method="post" ng-submit="addShow()" name="addForm">
+        <div class="form-group">
+          <input class="form-control" type="text" name="textQuery" ng-model="textQuery" placeholder="Put your query here" required autofocus>
+          <div class="help-block text-danger" ng-if="addForm.textQuery.$dirty" ng-messages="addForm.textQuery.$error">
+            <div ng-message="required">Please enter a query.</div>
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit" ng-disabled="addForm.$invalid">Run</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="jumbotron">
+  <div class="container">
+    <ul class="genres">
+      <li ng-repeat="ks in keyspaces">
+        <span ng-click="GetTables(ks)">{{ks}}</span>
+      </li>
+    </ul>
+  </div><br />
+  <div class="container">
+    <ul class="genres">
+      <li ng-repeat="name in tables">
+        <span ng-click="GenerateTables(name.columnfamily_name, name.keyspace_name)">
+          {{name.columnfamily_name}}
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<br /> -->
+
+<div class="jumbotron">
+  <div class="container">
+    <table border="1">
+      <thead>
+        <tr>
+          <th ng-repeat="(key, value) in genData[0]">{{key}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="items in genData">
+          <td ng-repeat="(key,value) in items">{{value}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

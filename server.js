@@ -23,7 +23,7 @@ client.connect(function(err, result) {
     console.log('Connected to Cassandra');
 });
 
-app.get('/metakey', function(req, res) {
+app.get('/api/metakey', function(req, res) {
     var arrKeyspaces = [];
 	for( var ks in client.metadata.keyspaces ) {
 	    arrKeyspaces.push( ks );
@@ -36,7 +36,7 @@ app.get('/metakey', function(req, res) {
 //     console.log("Keyspace = "+ keyspace);    
 // });
 
-app.post('/metatable', function(req, res) {
+app.post('/api/metatable', function(req, res) {
     var newclient = new cassandra.Client( { contactPoints : [ '10.0.0.2' ], keyspace: 'system'} );
     newclient.connect(function(err, result) {
         console.log('Connected to new keyspace');
@@ -51,14 +51,9 @@ app.post('/metatable', function(req, res) {
             res.send(data);        
         }
     });
-    // var arrTables = [];
-    // for( var tb in client.metadata.tables ) {
-    //     arrTables.push( tb );
-    // }
-    // res.send(arrTables);
 });
 
-app.post('/gentable', function(req, res) {
+app.post('/api/gentable', function(req, res) {
     var newclient = new cassandra.Client( { contactPoints : [ '10.0.0.2' ], keyspace: [req.body.keyspace]} );
     newclient.connect(function(err, result) {
         console.log('Connected to new keyspace');
@@ -67,6 +62,23 @@ app.post('/gentable', function(req, res) {
     console.log("Keyspace = "+ req.body.keyspace); 
     console.log("Using table = "+ req.body.table); 
     newclient.execute('SELECT * FROM ' + [req.body.table], function(err, result) {
+        if (err) {
+            res.status(404).send({ msg : 'Schema not found' });
+        } else {
+            var data = result.rows;
+            res.send(data);        
+        }
+    });
+});
+
+app.post('/api/cql', function(req, res) {
+    var newclient = new cassandra.Client( { contactPoints : [ '10.0.0.2' ], keyspace: [req.body.keyspace]} );
+    newclient.connect(function(err, result) {
+        console.log('Connected to new keyspace');
+    });
+    console.log([req.body.textq]);
+    console.log(req.body.textq);
+    newclient.execute(req.body.textq, function(err, result) {
         if (err) {
             res.status(404).send({ msg : 'Schema not found' });
         } else {

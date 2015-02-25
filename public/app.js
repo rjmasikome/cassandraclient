@@ -7,13 +7,9 @@ angular.module('MyApp', ['ngCookies', 'ngResource', 'ngMessages', 'ngRoute', 'mg
 	    templateUrl: 'views/home.html',
 	    controller: 'MainCtrl'
 	  })
-	  .when('/shows/:id', {
-	    templateUrl: 'views/detail.html',
-	    controller: 'DetailCtrl'
-	  })
-	  .when('/login', {
-	    templateUrl: 'views/login.html',
-	    controller: 'LoginCtrl'
+	  .when('/cql', {
+	    templateUrl: 'views/cql.html',
+	    controller: 'AddCtrl'
 	  })
 	  .when('/signup', {
 	    templateUrl: 'views/signup.html',
