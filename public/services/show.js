@@ -1,4 +1,7 @@
 angular.module('MyApp')
   .factory('Show', ['$resource', function($resource) {
-    return $resource('/api/shows');
+    return {
+    	keyspaces: $resource('/metakey'),
+    	tables: $resource('/metatable')
+    };
 }]);

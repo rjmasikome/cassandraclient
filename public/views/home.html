@@ -1,19 +1,22 @@
-<!-- <div class="jumbotron">
+<div class="jumbotron">
   <div class="container">
-    <ul class="alphabet">
-      <li ng-repeat="char in alphabet">
-        <span ng-click="filterByAlphabet(char)">{{char}}</span>
-      </li>
-    </ul>
     <ul class="genres">
-      <li ng-repeat="genre in genres">
-        <span ng-click="filterByGenre(genre)">{{genre}}</span>
+      <li ng-repeat="ks in keyspaces">
+        <span ng-click="GetTables(ks)">{{ks}}</span>
       </li>
     </ul>
   </div>
-</div> -->
+  <div class="container">
+    <ul class="genres">
+      <li ng-repeat="name in tables">
+        <span>{{name.columnfamily_name}}</span>
+      </li>
+    </ul>
+  </div>
+</div>
 
-<div class="jumbotron">
+
+<!-- <div class="jumbotron">
   <div class="container">
     <table border="1">
       <thead>
@@ -26,7 +29,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="data in shows">
+        <tr ng-repeat="data in tables">
           <td>{{data.lastname}}</td>
           <td>{{data.firstname}}</td>
           <td>{{data.age}}</td>
@@ -36,7 +39,7 @@
       </tbody>
     </table>
   </div>
-</div>
+</div> -->
 
 
 <!-- <div class="container">
