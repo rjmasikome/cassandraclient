@@ -9,59 +9,28 @@
   <div class="container">
     <ul class="genres">
       <li ng-repeat="name in tables">
-        <span>{{name.columnfamily_name}}</span>
+        <span ng-click="GenerateTables(name.columnfamily_name, name.keyspace_name)">
+          {{name.columnfamily_name}}
+        </span>
       </li>
     </ul>
   </div>
 </div>
 
 
-<!-- <div class="jumbotron">
+<div class="jumbotron">
   <div class="container">
     <table border="1">
       <thead>
         <tr>
-          <th>Last Name</th>
-          <th>First Name</th>
-          <th>Age</th>
-          <th>City</th>
-          <th>Email</th>
+          <th ng-repeat="(key, value) in genData[0]">{{key}}</th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="data in tables">
-          <td>{{data.lastname}}</td>
-          <td>{{data.firstname}}</td>
-          <td>{{data.age}}</td>
-          <td>{{data.city}}</td>
-          <td>{{data.email}}</td>
+        <tr ng-repeat="items in genData">
+          <td ng-repeat="(key,value) in items">{{value}}</td>
         </tr>
       </tbody>
     </table>
   </div>
-</div> -->
-
-
-<!-- <div class="container">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      {{headingTitle}}
-      <div class="pull-right">
-        <input class="search" type="text" ng-model="query.name" placeholder="Search...">
-      </div>
-    </div>
-    <div class="panel-body">
-      <div class="row show-list">
-        <div class="col-xs-4 col-md-3" ng-repeat="show in shows | filter:query | orderBy:'rating':true">
-          <a href="/shows/{{show._id}}">
-            <img class="img-rounded" ng-src="{{show.poster}}" width="100%"/>
-          </a>
-          <div class="text-center">
-            <a href="/shows/{{show._id}}">{{show.name}}</a>
-            <p class="text-muted">Episodes: {{show.episodes.length}}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
+</div>

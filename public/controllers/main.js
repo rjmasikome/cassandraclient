@@ -9,7 +9,7 @@ angular.module('MyApp')
 
     $scope.GetTables = function(ks) {
         $scope.keySpace = ks;
-        $http.post('/metatable', {keyspace: $scope.keySpace}).
+        $http.post('/metatable', {keyspace: ks}).
                 success(function(data) {
                    console.log(data);
                    $scope.tables = data;
@@ -17,7 +17,19 @@ angular.module('MyApp')
                     $scope.errorMessage = err;
                     console.log(err);
                 });
-
         // $scope.tables = Show.tables.query();
     };
+
+    $scope.GenerateTables = function(table, ks) {
+        $http.post('/gentable', {table: table, keyspace: ks}).
+                success(function(data) {
+                   console.log(data);
+                   $scope.genData = data;
+                }).error(function(err) {
+                    $scope.errorMessage = err;
+                    console.log(err);
+                });
+        // $scope.tables = Show.tables.query();
+    };
+
   }]);
