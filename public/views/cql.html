@@ -1,8 +1,8 @@
 <div class="jumbotron">
   <div class="container">
     <div class="panel-heading">Keyspace:    {{keySpace}}</div>
-    <ul class="genres">
-      <li ng-repeat="ks in keyspaces">
+    <ul ng-repeat="keyspace in metadata" class="genres">
+      <li ng-repeat="(ks, value) in keyspace.keyspaces">
         <span ng-click="GetTables(ks)">{{ks}}</span>
       </li>
     </ul>
@@ -25,27 +25,6 @@
     </div>
   </div>
 </div>
-
-<!-- <div class="jumbotron">
-  <div class="container">
-    <ul class="genres">
-      <li ng-repeat="ks in keyspaces">
-        <span ng-click="GetTables(ks)">{{ks}}</span>
-      </li>
-    </ul>
-  </div><br />
-  <div class="container">
-    <ul class="genres">
-      <li ng-repeat="name in tables">
-        <span ng-click="GenerateTables(name.columnfamily_name, name.keyspace_name)">
-          {{name.columnfamily_name}}
-        </span>
-      </li>
-    </ul>
-  </div>
-</div>
-
-<br /> -->
 
 <div class="jumbotron">
   <div class="container">

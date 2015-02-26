@@ -7,6 +7,10 @@ angular.module('MyApp', ['ngCookies', 'ngResource', 'ngMessages', 'ngRoute', 'mg
 	    templateUrl: 'views/home.html',
 	    controller: 'MainCtrl'
 	  })
+	  .when('/explore', {
+	    templateUrl: 'views/explore.html',
+	    controller: 'MainCtrl'
+	  })
 	  .when('/cql', {
 	    templateUrl: 'views/cql.html',
 	    controller: 'AddCtrl'

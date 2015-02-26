@@ -1,7 +1,7 @@
 angular.module('MyApp')
   .controller('MainCtrl', ['$scope', '$http','Show', function($scope, $http, Show) {
 
-    $scope.keyspaces = Show.keyspaces.query();
+    $scope.metadata = Show.metadata.query();
 
     $scope.GetTables = function(ks) {
         $scope.keySpace = ks;

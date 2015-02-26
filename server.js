@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var cassandra = require('cassandra-driver');
 
 var app = express();
+var contactPoint = '10.0.0.2';
 
 app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
@@ -18,26 +19,22 @@ app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-var client = new cassandra.Client( { contactPoints : [ '10.0.0.2' ]} );
+var client = new cassandra.Client( { contactPoints : [ contactPoint ]} );
 client.connect(function(err, result) {
     console.log('Connected to Cassandra');
 });
 
 app.get('/api/metakey', function(req, res) {
     var arrKeyspaces = [];
-	for( var ks in client.metadata.keyspaces ) {
-	    arrKeyspaces.push( ks );
-	}
+	// for( var ks in client.metadata.keyspaces ) {
+	//     arrKeyspaces.push( client.metadata );
+	// }
+    arrKeyspaces.push( client.metadata );
    	res.send(arrKeyspaces);
 });
 
-// app.post('/t', function(req, res) {
-//     var keyspace=req.body.keyspace;
-//     console.log("Keyspace = "+ keyspace);    
-// });
-
 app.post('/api/metatable', function(req, res) {
-    var newclient = new cassandra.Client( { contactPoints : [ '10.0.0.2' ], keyspace: 'system'} );
+    var newclient = new cassandra.Client( { contactPoints : [ contactPoint ], keyspace: 'system'} );
     newclient.connect(function(err, result) {
         console.log('Connected to new keyspace');
     });
@@ -54,7 +51,7 @@ app.post('/api/metatable', function(req, res) {
 });
 
 app.post('/api/gentable', function(req, res) {
-    var newclient = new cassandra.Client( { contactPoints : [ '10.0.0.2' ], keyspace: [req.body.keyspace]} );
+    var newclient = new cassandra.Client( { contactPoints : [ contactPoint ], keyspace: [req.body.keyspace]} );
     newclient.connect(function(err, result) {
         console.log('Connected to new keyspace');
     });
@@ -72,7 +69,7 @@ app.post('/api/gentable', function(req, res) {
 });
 
 app.post('/api/cql', function(req, res) {
-    var newclient = new cassandra.Client( { contactPoints : [ '10.0.0.2' ], keyspace: [req.body.keyspace]} );
+    var newclient = new cassandra.Client( { contactPoints : [ contactPoint ], keyspace: [req.body.keyspace]} );
     newclient.connect(function(err, result) {
         console.log('Connected to new keyspace');
     });
@@ -87,6 +84,10 @@ app.post('/api/cql', function(req, res) {
         }
     });
 });
+
+// app.get('*', function(req, res) {
+//   res.redirect('/#' + req.originalUrl);
+// });
 
 // app.get('/api/tables', function(req, res) {
 //     newclient.execute('SELECT * FROM USERS;', function(err, result) {
