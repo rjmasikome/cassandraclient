@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var cassandra = require('cassandra-driver');
 
 var app = express();
-var contactPoint = '192.168.8.128';
+var contactPoint = '10.0.0.2';
 
 app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
