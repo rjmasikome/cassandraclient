@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var cassandra = require('cassandra-driver');
 
 var app = express();
-var contactPoint = '10.0.0.2';
+var contactPoint = '192.168.8.128';
 
 app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
@@ -78,6 +78,25 @@ app.post('/api/gentable', function(req, res) {
         }
     });
 });
+
+app.post('/api/genmeta', function(req, res) {
+    var newclient = new cassandra.Client( { contactPoints : [ contactPoint ], keyspace: 'system'} );
+    newclient.connect(function(err, result) {
+        console.log('Connected to new keyspace');
+    });
+
+    console.log("Keyspace = "+ req.body.keyspace); 
+    console.log("Using table = "+ req.body.table); 
+    newclient.execute('SELECT * FROM schema_columns where keyspace_name = ?', [req.body.keyspace], function(err, result) {
+        if (err) {
+            res.status(404).send({ msg : 'Schema not found' });
+        } else {
+            var data = result.rows;
+            res.send(data);        
+        }
+    });
+});
+
 
 app.post('/api/cql', function(req, res) {
     var newclient = new cassandra.Client( { contactPoints : [ contactPoint ], keyspace: [req.body.keyspace]} );
