@@ -38,14 +38,13 @@
         <div id="dtabex" style="height:100%">
           <table id="tabex">
             <tr>
-              <th ng-repeat="(key, value) in genMeta[0]" id="thex">{{key}}</th>
+              <th ng-repeat="(key, value) in genMeta[0]" id="thex" ng-if="(key == 'column_name') || (key == 'type') || (key == 'validator')">{{key}}</th>
             </tr>
-            <tr ng-repeat="items in genMeta">
-              <td ng-repeat="(key,value) in items" id="tdex">{{value}}</td>
+            <tr ng-repeat="items in genMeta" ng-if="items.columnfamily_name==tableName">
+              <td ng-repeat="(key,value) in items" id="tdex" ng-if="(key == 'column_name') || (key == 'type') || (key == 'validator')">{{value}}</td>
             </tr>
           </table>
         </div>
-
       </div>
     </div>
   </div>

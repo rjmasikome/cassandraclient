@@ -48,7 +48,7 @@ MyApp
         }
         
         else if (tabmeta=="met"){
-          $http.post('/api/genmeta', {table: table, keyspace: ks}).
+        $http.post('/api/genmeta', {table: table, keyspace: ks}).
                 success(function(data) {
                    console.log(data);
                    $scope.genMeta = data;
@@ -58,16 +58,6 @@ MyApp
                     console.log(err);
                 });
         }
-
-          var temp;
-          var i;
-          var j;
-
-          /*for(i=0; i<data.length; i++){
-            for(j=0; j<data[i].length; i++){
-              if(data[i][j].)
-            }
-          }*/
         // $scope.tables = Show.tables.query();
     };
 
