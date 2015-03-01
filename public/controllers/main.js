@@ -1,7 +1,25 @@
-angular.module('MyApp')
-  .controller('MainCtrl', ['$scope', '$http','Show', function($scope, $http, Show) {
+MyApp
+  .controller('MainCtrl', ['$scope', '$timeout', '$alert', '$http','Show', function($scope, $timeout, $alert, $http, Show) {
 
     $scope.metadata = Show.metadata.query();
+
+    $scope.heartbeat = function() {
+      $http.post('api/metakey').
+        success(function(data) {
+           console.log(data);
+           $timeout($scope.heartbeat, 5000);
+        }).error(function(err) {
+            $scope.errorMessage = err;
+            console.log(err);
+            $alert({
+                title: 'Error!',
+                content: 'Connection lost. Please make sure your server or database is up and running.',
+                placement: 'top-right',
+                type: 'danger',
+                duration: 10
+              });
+        });
+      };
 
     $scope.GetTables = function(ks) {
         $scope.keySpace = ks;
@@ -13,7 +31,6 @@ angular.module('MyApp')
                     $scope.errorMessage = err;
                     console.log(err);
                 });
-        // $scope.tables = Show.tables.query();
     };
 
     $scope.GenerateTables = function(table, ks) {
@@ -26,7 +43,8 @@ angular.module('MyApp')
                     $scope.errorMessage = err;
                     console.log(err);
                 });
-        // $scope.tables = Show.tables.query();
     };
+
+    $scope.heartbeat();
 
   }]);

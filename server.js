@@ -1,18 +1,16 @@
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cassandra = require('cassandra-driver');
 
 var app = express();
-var contactPoint = '192.168.8.128';
+var contactPoint = '10.0.0.2';
 
 app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(app.get('port'), function() {
@@ -21,16 +19,29 @@ app.listen(app.get('port'), function() {
 
 var client = new cassandra.Client( { contactPoints : [ contactPoint ]} );
 client.connect(function(err, result) {
-    console.log('Connected to Cassandra');
+    if (err) {
+            console.log('Unable to connect');
+        } else {
+            console.log('Connected to Cassandra');      
+        }
 });
 
 app.get('/api/metakey', function(req, res) {
     var arrKeyspaces = [];
-    // for( var ks in client.metadata.keyspaces ) {
-    //     arrKeyspaces.push( client.metadata );
-    // }
     arrKeyspaces.push( client.metadata );
-    res.send(arrKeyspaces);
+   	res.send(arrKeyspaces);
+});
+
+app.post('/api/metakey', function(req, res) {
+    var newclient = new cassandra.Client( { contactPoints : [ contactPoint ], keyspace: 'system'} );
+    newclient.execute('SELECT * FROM schema_columnfamilies where keyspace_name = ?', ['demo'] , function(err, result) {
+        if (err) {
+            res.status(404).send({ msg : 'Schema not found' });
+        } else {
+            var data = result.rows;
+            res.send(data);        
+        }
+    });
 });
 
 app.post('/api/metatable', function(req, res) {
@@ -85,9 +96,9 @@ app.post('/api/cql', function(req, res) {
     });
 });
 
-// app.get('*', function(req, res) {
-//   res.redirect('/#' + req.originalUrl);
-// });
+app.get('*', function(req, res) {
+  res.redirect('/#' + req.originalUrl);
+});
 
 // app.get('/api/tables', function(req, res) {
 //     newclient.execute('SELECT * FROM USERS;', function(err, result) {

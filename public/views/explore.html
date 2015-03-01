@@ -45,8 +45,8 @@
       <div class="panel-heading" style="text-transform:none">KEYSPACE: <span id="phvex">{{keySpace}}</span></div>
       <div class="panel-body" style="overflow:auto">
         <ul ng-repeat="keyspace in metadata" class="genres" style="list-style-type:none; padding:0">
-          <li ng-repeat="(ks, value) in keyspace.keyspaces" style="display:list-item; text-align:left; font-size:small">
-            <span ng-click="GetTables(ks)">{{ks}}</span>
+          <li ng-click="GetTables(ks)" ng-repeat="(ks, value) in keyspace.keyspaces" style="display:list-item; text-align:left; font-size:small">
+            <span>{{ks}}</span>
           </li>
         </ul>
       </div>
