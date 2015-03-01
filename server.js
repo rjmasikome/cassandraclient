@@ -88,7 +88,8 @@ app.post('/api/cql', function(req, res) {
     console.log(req.body.textq);
     newclient.execute(req.body.textq, function(err, result) {
         if (err) {
-            res.status(404).send({ msg : 'Schema not found' });
+            console.log([err])
+            res.status(404).send([err]);
         } else {
             var data = result.rows;
             res.send(data);        

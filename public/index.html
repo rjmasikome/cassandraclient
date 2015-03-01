@@ -14,25 +14,15 @@
 		<div class="navbar navbar-default navbar-static-top"
 		     role="navigation" bs-navbar>
 		  <div class="navbar-header">
-		    <a class="navbar-brand" href="/">
+		    <a class="navbar-brand" href="/$">
 		      <span class="glyphicon glyphicon-film"></span>
 		      Cassandra<strong>Client</strong></a>
 		  </div>
 		  <ul class="nav navbar-nav">
-		    <li data-match-route="/$"><a href="/">Home</a></li>
-		    <li data-match-route="/explore"><a href="/explore">Explore</a></li>
+		    <li data-match-route="/$"><a href="/">Explore</a></li>
 		    <li data-match-route="/cql"><a href="/cql">CQL</a></li>
-		    <li data-match-route="/export"><a href="/export">Export</a></li>
-		    <li data-match-route="/import"><a href="/import">Import</a></li>
+		    <li data-match-route="/details"><a href="/details">Details</a></li>
 		  </ul>
-		  <!-- <ul class="nav navbar-nav pull-right" ng-if="!currentUser">
-		    <li data-match-route="/login"><a href="/login">Login</a></li>
-		    <li data-match-route="/signup"><a href="/signup">Sign up</a></li>
-		  </ul>
-		  <ul class="nav navbar-nav pull-right" ng-if="currentUser">
-		    <li class="navbar-text" ng-bind="currentUser.email"></li>
-		    <li><a href="javascript:void(0)" ng-click="logout()">Logout</a></li>
-		  </ul> -->
 		</div>
 
 		<div ng-view></div>

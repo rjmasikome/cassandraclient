@@ -4,24 +4,16 @@ var MyApp = angular.module('MyApp', ['ngResource', 'ngMessages', 'ngRoute', 'mgc
 
     $routeProvider
 	  .when('/', {
-	    templateUrl: 'views/home.html',
-	    controller: 'MainCtrl'
-	  })
-	  .when('/explore', {
 	    templateUrl: 'views/explore.html',
 	    controller: 'MainCtrl'
 	  })
 	  .when('/cql', {
 	    templateUrl: 'views/cql.html',
-	    controller: 'AddCtrl'
+	    controller: 'MainCtrl'
 	  })
-	  .when('/signup', {
-	    templateUrl: 'views/signup.html',
-	    controller: 'SignupCtrl'
-	  })
-	  .when('/add', {
-	    templateUrl: 'views/add.html',
-	    controller: 'AddCtrl'
+	  .when('/details', {
+	    templateUrl: 'views/details.html',
+	    controller: 'MainCtrl'
 	  })
 	  .otherwise({
 	    redirectTo: '/'

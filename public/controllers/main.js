@@ -45,6 +45,28 @@ MyApp
                 });
     };
 
+    $scope.addShow = function(){
+        $http.post('/api/cql', {textq: $scope.textQuery, keyspace: $scope.keySpace}).
+                success(function(data) {
+                   console.log(data);
+                   $scope.genData = data;
+           $scope.textQueryResult = "Query executed successfully!";
+            // }).error(function(err) {
+        }).error(function(data,status,headers,config){                
+          //$scope.errorMessage = err;
+                    //console.log(err);
+          $scope.textQueryResult = "Failed! See error message below"
+          $scope.genData = data;
+                });
+    };
+  
+   $scope.resetForm = function ()
+    {
+      $scope.textQuery="";
+    $scope.textQueryResult="";
+    $scope.genData="";
+    };
+
     $scope.heartbeat();
 
   }]);
