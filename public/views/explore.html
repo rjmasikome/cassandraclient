@@ -60,22 +60,22 @@
         <button class="btn btn-primary" type="submit" ng-disabled="" id="butex">meta</button></br></br>
         <div id="dtabex">
           <table id="tabex">
+            <tr>
+              <th ng-repeat="(key, value) in genData[0]" id="thex">{{key}}</th>
+            </tr>
+            <tr ng-repeat="items in genData">
+              <td ng-repeat="(key,value) in items" id="tdex">{{value}}</td>
+            </tr>
+          </table>
+        </div></br>
+        <div id="dtabex">
+          <table id="tabex">
             <tr ng-repeat="(ks, value) in coba">
               <td id="thex" style="text-align:left">{{ks}}</td>
               <td id="tdex">{{value}}</td>
             </tr>
           </table>
-        </div></br>
-        <div id="dtabex">
-        <table id="tabex">
-          <tr>
-            <th ng-repeat="(key, value) in genData[0]" id="thex">{{key}}</th>
-          </tr>
-          <tr ng-repeat="items in genData">
-            <td ng-repeat="(key,value) in items" id="tdex">{{value}}</td>
-          </tr>
-        </table>
-      </div>
+        </div>
       </div>
     </div>
   </div>
