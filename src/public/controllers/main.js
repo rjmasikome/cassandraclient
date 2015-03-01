@@ -3,7 +3,6 @@ MyApp
 
     $scope.metadata = Show.metadata.query();
     $scope.tip = "met";
-    $scope.tab = "Test";
     $scope.shown = false;
 
     $scope.heartbeat = function() {
