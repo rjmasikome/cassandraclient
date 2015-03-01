@@ -42,7 +42,7 @@
 <div class="container-fluid" style="height:100%">
   <div class="col-sm-2 col-md-2 col-lg-2" style="height:100%">
     <div class="panel panel-default">
-      <div class="panel-heading" style="text-transform:none">KEYSPACE: <span style="color:#777777">{{keySpace}}</span></div>
+      <div class="panel-heading" style="text-transform:none">KEYSPACE: <span id="phvex">{{keySpace}}</span></div>
       <div class="panel-body" style="overflow:auto">
         <ul ng-repeat="keyspace in metadata" class="genres" style="list-style-type:none; padding:0">
           <li ng-repeat="(ks, value) in keyspace.keyspaces" style="display:list-item; text-align:left; font-size:small">
@@ -54,17 +54,25 @@
   </div>
   <div class="col-sm-10 col-md-10 col-lg-10">
     <div class="panel panel-default" style="height:100%">
-      <div class="panel-heading" style="height:100% text-transform:none">TABLE: <span style="color:#777777">{{tableName}}</span></div>
+      <div class="panel-heading" style="height:100%;text-transform:none">TABLE: <span id="phvex">{{tableName}}</span></div>
       <div class="panel-body" style="height:100%"> 
-        <select class="genres" ng-options="name.columnfamily_name for name in tables" ng-model="coba" ng-change="GenerateTables(coba.columnfamily_name, coba.keyspace_name)"></select>
-        <button class="btn btn-primary" type="submit" ng-disabled="" style="padding:2px 10px 2px 10px">meta</button></br></br>    
-        <div style="height:460px;width:100%;overflow:auto">
-        <table style="border: 2px solid #596880 collapse">
+        <select class="genres" ng-options="name.columnfamily_name for name in tables" ng-model="coba" ng-change="GenerateTables(coba.columnfamily_name, coba.keyspace_name)"></select>&nbsp;&nbsp;
+        <button class="btn btn-primary" type="submit" ng-disabled="" id="butex">meta</button></br></br>
+        <div id="dtabex">
+          <table id="tabex">
+            <tr ng-repeat="(ks, value) in coba">
+              <td id="thex" style="text-align:left">{{ks}}</td>
+              <td id="tdex">{{value}}</td>
+            </tr>
+          </table>
+        </div></br>
+        <div id="dtabex">
+        <table id="tabex">
           <tr>
-            <th ng-repeat="(key, value) in genData[0]" style="font-family:Courier New; padding:3px 5px 3px 5px; color:white; text-align:center; border: 2px solid #596880; background: #8492a8">{{key}}</th>
+            <th ng-repeat="(key, value) in genData[0]" id="thex">{{key}}</th>
           </tr>
           <tr ng-repeat="items in genData">
-            <td ng-repeat="(key,value) in items" style="font-family:Courier New; padding:3px 5px 3px 5px; border: 2px solid #596880; background: #f1f3f5">{{value}}</td>
+            <td ng-repeat="(key,value) in items" id="tdex">{{value}}</td>
           </tr>
         </table>
       </div>

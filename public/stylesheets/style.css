@@ -992,6 +992,43 @@ html {
   font-size: 10px;
   -webkit-tap-highlight-color: transparent; }
 
+html, body{
+  height: 100%;
+}
+
+#phvex
+{
+  color:#777777;
+  font-size:13px;
+}
+
+#butex{
+  padding:2px 10px 2px 10px;
+}
+
+#dtabex{
+  height:460px;
+  width:100%;
+  overflow:auto;
+}
+
+#tabex{
+  border: 2px solid #596880 collapse;
+}
+
+#thex{
+  style="font-family:Courier New;
+  padding:3px 5px 3px 5px;
+  color:white; text-align:center;
+  border: 2px solid #596880; background: #8492a8;
+}
+
+#tdex{
+  font-family:Courier New;
+  padding:3px 5px 3px 5px; border: 2px solid #596880;
+  background: #f1f3f5;
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;

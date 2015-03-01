@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var cassandra = require('cassandra-driver');
 
 var app = express();
-var contactPoint = '10.0.0.2';
+var contactPoint = '192.168.8.128';
 
 app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
@@ -26,11 +26,11 @@ client.connect(function(err, result) {
 
 app.get('/api/metakey', function(req, res) {
     var arrKeyspaces = [];
-	// for( var ks in client.metadata.keyspaces ) {
-	//     arrKeyspaces.push( client.metadata );
-	// }
+    // for( var ks in client.metadata.keyspaces ) {
+    //     arrKeyspaces.push( client.metadata );
+    // }
     arrKeyspaces.push( client.metadata );
-   	res.send(arrKeyspaces);
+    res.send(arrKeyspaces);
 });
 
 app.post('/api/metatable', function(req, res) {
