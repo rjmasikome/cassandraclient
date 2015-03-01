@@ -36,7 +36,7 @@ MyApp
     $scope.GenerateTables = function(table, ks, tabmeta) {
         $scope.tableName = table;
         if(tabmeta=="dat"){
-        $http.post('/api/gentable', {table: table, keyspace: ks}).
+          $http.post('/api/gentable', {table: table, keyspace: ks}).
                 success(function(data) {
                    console.log(data);
                    $scope.genData = data;
@@ -44,9 +44,11 @@ MyApp
                 }).error(function(err) {
                     $scope.errorMessage = err;
                     console.log(err);
-                });}
+                });
+        }
+        
         else if (tabmeta=="met"){
-        $http.post('/api/genmeta', {table: table, keyspace: ks}).
+          $http.post('/api/genmeta', {table: table, keyspace: ks}).
                 success(function(data) {
                    console.log(data);
                    $scope.genMeta = data;
@@ -54,7 +56,18 @@ MyApp
                 }).error(function(err) {
                     $scope.errorMessage = err;
                     console.log(err);
-                });}
+                });
+        }
+        
+          var temp;
+          var i;
+          var j;
+
+          for(i=0; i<data.length; i++){
+            for(j=0; j<data[i].length; i++){
+              if(data[i][j].)
+            }
+          }
         // $scope.tables = Show.tables.query();
     };
 
@@ -69,18 +82,6 @@ MyApp
           //$scope.errorMessage = err;
                     //console.log(err);
           $scope.textQueryResult = "Failed! See error message below"
-
-          var temp;
-          var i;
-          var j;
-
-          /*for(i=0; i<data.length; i++){
-            for(j=0; j<data[i].length; i++){
-              if
-            }
-          }*/
-
-          console.log(data.length);
           $scope.genData = data;
                 });
     };
