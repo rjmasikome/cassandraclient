@@ -7,21 +7,43 @@
       </li>
     </ul>
   </div>
+
+
+ <div class="container">
+    <div class="panel-heading">Table:    {{tableName}}</div>
+    <ul class="genres">
+      <li ng-repeat="name in tables">
+        <span ng-click="GenerateTables(name.columnfamily_name, name.keyspace_name)">
+          {{name.columnfamily_name}}
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
 </div>
 
 <div class="container">
   <div class="panel panel-default">
     <div class="panel-heading">Run CQL</div>
     <div class="panel-body">
-      <form class="form" method="post" ng-submit="addShow()" name="addForm">
-        <div class="form-group">
-          <input class="form-control" type="text" name="textQuery" ng-model="textQuery" placeholder="Put your query here" required autofocus>
-          <div class="help-block text-danger" ng-if="addForm.textQuery.$dirty" ng-messages="addForm.textQuery.$error">
+      <form class="form" method="post"  ng-submit="addShow()" name="addForm" >  
+		<div class="form-group">
+			  <p> KEYSPACE: {{keySpace}}
+			  <!--<input class="form-control" type="text" name="keySpace" ng-model = "keySpaceName" placeholder=" {{keySpace}}" required> 
+			  <!--<span style="color:red" ng-show="addForm.keySpaceName.$invalid">
+			  <span ng-show="addForm.keySpaceName.$error.required">KEYSPACE is required.</span>-->
+			   </p>
+		  <input class="form-control" type="text" name="textQuery" ng-model="textQuery" placeholder="Put your query here" required autofocus>        
+		  <div class="help-block text-danger" ng-if="addForm.textQuery.$dirty" ng-messages="addForm.textQuery.$error">
             <div ng-message="required">Please enter a query.</div>
           </div>
         </div>
         <button class="btn btn-primary" type="submit" ng-disabled="addForm.$invalid">Run</button>
-      </form>
+		<button class="btn btn-primary" ng-click="resetForm()">Clear</button>
+		<div>your Keyspace is : {{ keySpace}} </div>
+		<div>your input query is : {{ textQuery }} </div>
+		<div>your query is {{textQueryResult}}</div>
+	</form>
     </div>
   </div>
 </div>
