@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var cassandra = require('cassandra-driver');
 
 var app = express();
-var contactPoint = '192.168.8.128';
+var contactPoint = '10.0.0.2';
 
 app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
@@ -20,7 +20,7 @@ app.listen(app.get('port'), function() {
 var client = new cassandra.Client( { contactPoints : [ contactPoint ]} );
 client.connect(function(err, result) {
     if (err) {
-            console.log('Unable to connect');
+            console.log('Unable to connect, please make sure your database is running');
         } else {
             console.log('Connected to Cassandra');      
         }
@@ -32,9 +32,9 @@ app.get('/api/metakey', function(req, res) {
    	res.send(arrKeyspaces);
 });
 
-app.post('/api/metakey', function(req, res) {
+app.post('/api/heartbeat', function(req, res) {
     var newclient = new cassandra.Client( { contactPoints : [ contactPoint ], keyspace: 'system'} );
-    newclient.execute('SELECT * FROM schema_columnfamilies where keyspace_name = ?', ['demo'] , function(err, result) {
+    newclient.execute('SELECT * from local', function(err, result) {
         if (err) {
             res.status(404).send({ msg : 'Schema not found' });
         } else {
@@ -66,12 +66,10 @@ app.post('/api/gentable', function(req, res) {
     newclient.connect(function(err, result) {
         console.log('Connected to new keyspace');
     });
-
-    console.log("Keyspace = "+ req.body.keyspace); 
-    console.log("Using table = "+ req.body.table); 
+ 
     newclient.execute('SELECT * FROM ' + [req.body.table], function(err, result) {
         if (err) {
-            res.status(404).send({ msg : 'Schema not found' });
+            res.status(404).send([err]);
         } else {
             var data = result.rows;
             res.send(data);        
@@ -84,9 +82,7 @@ app.post('/api/genmeta', function(req, res) {
     newclient.connect(function(err, result) {
         console.log('Connected to new keyspace');
     });
-
-    console.log("Keyspace = "+ req.body.keyspace); 
-    console.log("Using table = "+ req.body.table); 
+ 
     newclient.execute('SELECT * FROM schema_columns where keyspace_name = ?', [req.body.keyspace], function(err, result) {
         if (err) {
             res.status(404).send({ msg : 'Schema not found' });

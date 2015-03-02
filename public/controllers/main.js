@@ -2,9 +2,11 @@ MyApp
   .controller('MainCtrl', ['$scope', '$timeout', '$alert', '$http','Show', function($scope, $timeout, $alert, $http, Show) {
 
     $scope.metadata = Show.metadata.query();
+    $scope.tip = "dat";
+    $scope.shown = false;
 
     $scope.heartbeat = function() {
-      $http.post('api/metakey').
+      $http.post('api/heartbeat').
         success(function(data) {
            console.log(data);
            $timeout($scope.heartbeat, 5000);
@@ -31,6 +33,7 @@ MyApp
                     $scope.errorMessage = err;
                     console.log(err);
                 });
+        $scope.shown = true;
     };
 
     $scope.GenerateTables = function(table, ks, tabmeta) {
@@ -58,7 +61,6 @@ MyApp
                     console.log(err);
                 });
         }
-        // $scope.tables = Show.tables.query();
     };
 
     $scope.addShow = function(){
@@ -67,11 +69,8 @@ MyApp
                    console.log(data);
                    $scope.genData = data;
            $scope.textQueryResult = "Query executed successfully!";
-            // }).error(function(err) {
-        }).error(function(data,status,headers,config){                
-          //$scope.errorMessage = err;
-                    //console.log(err);
-          $scope.textQueryResult = "Failed! See error message below"
+        }).error(function(data,status,headers,config){
+          $scope.textQueryResult = "ERROR! See message below"
           $scope.genData = data;
                 });
     };

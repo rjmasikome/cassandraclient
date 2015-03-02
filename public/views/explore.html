@@ -11,14 +11,14 @@
       </div>
     </div>
   </div>
-  <div class="col-sm-10 col-md-10 col-lg-10">
+  <div class="col-sm-10 col-md-10 col-lg-10" ng-show="shown">
     <div class="panel panel-default" style="height:100%">
       <div class="panel-heading" style="height:100%;text-transform:none">TABLE: <span id="phvex">{{tableName}}</span></div>
       <div class="panel-body" style="height:100%"> 
         <form>
-          <select class="genres" ng-options="name.columnfamily_name for name in tables" ng-model="tab" ng-change="GenerateTables(tab.columnfamily_name, tab.keyspace_name, tip)"></select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <select class="genres" ng-model="tab" ng-options="name.columnfamily_name for name in tables" ng-change="GenerateTables(tab.columnfamily_name, tab.keyspace_name, tip)"></select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <input type="radio" ng-model="tip" value="dat" ng-change="GenerateTables(tab.columnfamily_name, tab.keyspace_name, tip)">Data&nbsp;&nbsp;&nbsp;
-          <input type="radio" ng-model="tip" value="met" ng-change="GenerateTables(tab.columnfamily_name, tab.keyspace_name, tip)">Meta
+          <input type="radio" ng-model="tip" value="met" checked="checked" ng-change="GenerateTables(tab.columnfamily_name, tab.keyspace_name, tip)">Meta
         </form> 
         
         </br>

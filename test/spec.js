@@ -1,50 +1,4 @@
 describe("Controller test", function() {
-	// beforeEach(module("MyApp"));
-
-        // var $httpBackend,
-        //     expectedUrl = '/api/metakey',
-        //     promise,
-        //     successCallback,
-        //     errorCallback,
-        //     httpController;
-
-        // beforeEach(inject(function ($rootScope, $controller, _$httpBackend_) {
-        //     $httpBackend = _$httpBackend_;
-        //     scope = $rootScope.$new();
-        //     successCallback = jasmine.createSpy();
-        //     errorCallback = jasmine.createSpy();
-        //     httpController = $controller('MainCtrl', {
-        //         $scope: scope
-        //     });
-        // }));
-
-        // afterEach(function() {
-        //     // $httpBackend.verifyNoOutstandingExpectation();
-        //     $httpBackend.verifyNoOutstandingRequest();
-        // });
-
-        // it('returns http requests successfully and resolves the promise', function () {
-        //     expect(httpController).toBeDefined();
-        //     $httpBackend.expectGET(expectedUrl).respond(200, 'Works');
-        //     promise = scope.heartbeat();
-        //     promise.then(successCallback, errorCallback);
-
-        //     $httpBackend.flush();
-
-        //     expect(successCallback).toHaveBeenCalledWith(angular.fromJson(data));
-        //     expect(errorCallback).not.toHaveBeenCalled();
-        // });
-
-        // it('returns http requests with an error and rejects the promise', function () {
-        //     // $httpBackend.expectGET(expectedUrl).respond(500, 'Oh no!!');
-        //     // promise = scope.heartbeat();
-        //     // promise.then(successCallback, errorCallback);
-
-        //     // $httpBackend.flush();
-
-        //     // expect(successCallback).not.toHaveBeenCalled();
-        //     // expect(errorCallback).toHaveBeenCalled();
-        // });
 
 var ctrl, scope, service;
 
@@ -59,6 +13,10 @@ var ctrl, scope, service;
 
 
   describe("MainCtrl", function() {
+    it('makes sure the default values are correct', function () {
+      expect(scope.tip).toBe("dat");
+      expect(scope.shown).toBe(false);
+  })
   	it('makes sure no keyspace is selected', function () {
   		expect(scope.keySpace).toBeUndefined();
 	})
