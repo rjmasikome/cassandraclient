@@ -1,5 +1,7 @@
 # cassandraclient
 
+![Alt text](https://raw.githubusercontent.com/rjmasikome/cassandraclient/master/cassandra.png "Technology used")
+
 This is a simple cassandra client written in Node.js and AngularJS. This is a first test in using Node.js and AngularJS as MVC. It's for educational purpose and feel free to comment. 
 
 Installation step:
